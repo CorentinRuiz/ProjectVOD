@@ -1,10 +1,14 @@
-public class Client {
+public class User {
     String email;
     String password;
 
-    public Client(String email, String password) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public User() {
+
     }
 
     public String getEmail() {
