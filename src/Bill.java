@@ -1,6 +1,6 @@
-import java.math.BigInteger;
+import java.io.Serializable;
 
-public class Bill {
+public class Bill implements Serializable {
     String movieName;
     Integer outrageousPrice;
 
