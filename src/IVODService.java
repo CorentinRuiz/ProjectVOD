@@ -1,5 +1,3 @@
-package server;
-
 import java.util.List;
 
 public interface IVODService {

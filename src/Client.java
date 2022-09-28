@@ -1,5 +1,3 @@
-package server;
-
 public class Client {
     String email;
     String password;

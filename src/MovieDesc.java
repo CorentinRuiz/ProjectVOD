@@ -1,5 +1,3 @@
-package server;
-
 public class MovieDesc {
     String movieName;
     String isbn;

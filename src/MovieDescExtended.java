@@ -1,5 +1,3 @@
-package server;
-
 public class MovieDescExtended extends MovieDesc{
     byte[] teaser;
 
