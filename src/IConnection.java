@@ -1,5 +1,11 @@
-public interface IConnection {
-    boolean signIn(String mail,String pwd);
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-    IVODService login(String mail,String pwd);
+import exceptions.InvalidCredentialsException;
+import exceptions.SignInFailed;
+
+public interface IConnection extends Remote {
+    boolean signIn(String mail,String pwd) throws SignInFailed, RemoteException;
+
+    IVODService login(String mail,String pwd) throws InvalidCredentialsException, RemoteException;
 }
