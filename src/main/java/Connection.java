@@ -1,13 +1,16 @@
 import exceptions.InvalidCredentialsException;
 import exceptions.SignInFailed;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Connection implements IConnection {
+public class Connection extends UnicastRemoteObject implements IConnection {
     UserManager userManager;
 
-    public Connection(UserManager userManager) {
+    public Connection(int port,UserManager userManager) throws RemoteException {
+        super(port);
         this.userManager = userManager;
     }
 
@@ -21,12 +24,14 @@ public class Connection implements IConnection {
         }
     }
 
-    public IVODService login(String mail,String pwd) throws InvalidCredentialsException {
+    public IVODService login(String mail,String pwd) throws InvalidCredentialsException, RemoteException {
         Optional<User> user = userManager.getUsers().stream().filter(client -> Objects.equals(client.getEmail(), mail)).findAny();
         if(user.isEmpty()){
             throw new InvalidCredentialsException("The user doesn't exist");
         }
-        else if(user.get().getPassword() != pwd){
+        else if(!Objects.equals(user.get().getPassword(), pwd)){
+            System.out.println(user.get().getPassword());
+            System.out.println(pwd);
             throw new InvalidCredentialsException("Wrong password");
         }
         else{
