@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class VODService extends UnicastRemoteObject implements IVODService {
 
@@ -19,12 +20,15 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return movies;
     }
 
-    public Bill playmovie(String isbn, IClientBox box) throws RemoteException, MalformedURLException, NotBoundException{
-        MovieDesc movieDescription = movies.stream().filter(movieDesc -> Objects.equals(movieDesc.getIsbn(), isbn)).findAny().get();
-        MovieDataManager manager = new MovieDataManager();
+    public Bill playmovie(String isbn, IClientBox box) throws NotBoundException, RemoteException, MalformedURLException {
+        Optional<MovieDesc> movieDescription = movies.stream().filter(movieDesc -> Objects.equals(movieDesc.getIsbn(), isbn)).findAny();
+        if(movieDescription.isEmpty()){
+            throw new NotBoundException("No movie with this isbn is found");
+        }
 
+        MovieDataManager manager = new MovieDataManager();
         String movie = manager.getMovie(isbn);
-        //byte[] allContent = Files.readAllBytes(Paths.get(movie));
+
         byte[] allContent = movie.getBytes();
         byte[] content = Arrays.copyOfRange(allContent,0,5);
         box.stream(content);
@@ -45,6 +49,6 @@ public class VODService extends UnicastRemoteObject implements IVODService {
 
             }
         }.start();
-        return new Bill(movieDescription.getIsbn(),movieDescription.getPrice());
+        return new Bill(movieDescription.get().getIsbn(),movieDescription.get().getPrice());
     }
 }
