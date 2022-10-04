@@ -1,11 +1,11 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MovieDataManager {
     public static final String FILE_PATH = System.getProperty("user.dir") + "/src/main/resources/data/movies.json";

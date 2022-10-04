@@ -11,6 +11,8 @@ public class Server {
             IConnection connection = new Connection(10001,userManager);
             Registry reg= LocateRegistry.createRegistry(2001);
             reg.rebind("connectionVOD",connection);
+        	System.out.println("Server launched successfully");
+            while(true) {}
         }catch(RemoteException e){
             System.err.println(e);
         }

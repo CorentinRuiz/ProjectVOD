@@ -1,10 +1,10 @@
-import exceptions.InvalidCredentialsException;
-import exceptions.SignInFailed;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Objects;
 import java.util.Optional;
+
+import exceptions.InvalidCredentialsException;
+import exceptions.SignInFailed;
 
 public class Connection extends UnicastRemoteObject implements IConnection {
     UserManager userManager;
@@ -30,8 +30,6 @@ public class Connection extends UnicastRemoteObject implements IConnection {
             throw new InvalidCredentialsException("The user doesn't exist");
         }
         else if(!Objects.equals(user.get().getPassword(), pwd)){
-            System.out.println(user.get().getPassword());
-            System.out.println(pwd);
             throw new InvalidCredentialsException("Wrong password");
         }
         else{

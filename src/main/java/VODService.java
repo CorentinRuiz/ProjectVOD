@@ -1,9 +1,4 @@
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -24,7 +19,7 @@ public class VODService extends UnicastRemoteObject implements IVODService {
         return movies;
     }
 
-    public Bill playmovie(String isbn, IClientBox box) throws IOException, NotBoundException {
+    public Bill playmovie(String isbn, IClientBox box) throws RemoteException, MalformedURLException, NotBoundException{
         MovieDesc movieDescription = movies.stream().filter(movieDesc -> Objects.equals(movieDesc.getIsbn(), isbn)).findAny().get();
         MovieDataManager manager = new MovieDataManager();
 
