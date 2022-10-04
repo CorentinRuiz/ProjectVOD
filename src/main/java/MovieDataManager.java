@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class MovieDataManager {
-    public static final String FILE_PATH = "/Users/corentinruiz/ProjectVOD/src/main/resources/data/movies.json";
+    public static final String FILE_PATH = System.getProperty("user.dir") + "/src/main/resources/data/movies.json";
 
     private List<Movie> movies;
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class UserManager {
-    public static final String FILE_PATH = "/Users/corentinruiz/ProjectVOD/src/main/resources/data/users.json";
+    public static final String FILE_PATH = System.getProperty("user.dir") + "/src/main/resources/data/users.json";
 
     private List<User> users;
 
