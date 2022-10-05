@@ -20,7 +20,7 @@ public class Connection extends UnicastRemoteObject implements IConnection {
         this.userManager = userManager;
     }
 
-    public boolean signIn(String mail, String pwd) throws SignInFailed {
+    public synchronized boolean signIn(String mail, String pwd) throws SignInFailed {
         if(userManager.getUsers().stream().anyMatch(m -> Objects.equals(m.getEmail(), mail))){
          throw new SignInFailed("This email is already used");
         }else{
